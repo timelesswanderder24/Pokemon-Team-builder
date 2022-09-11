@@ -12,7 +12,7 @@ export default function Home() {
   const [pokeNames, addPokeName] = useState([]);
   const [maxReached, maxUpdate] = useState(false);
   const [width, setWidth] = useState(0); 
- 
+    
   async function updateNewPoke(id, name, url) {  
     const response = await fetch('/api/pokemonTeamAPI', {
       method: 'POST',
@@ -46,7 +46,7 @@ export default function Home() {
   }
 
  async function addToTeam(search){ 
-  if(team.length<=3){
+  
     if (search !== "" && !pokeNames.includes(search)) {
       const response = await fetch('/api/pokemonsAPI')
       const data = await response.json() 
@@ -57,9 +57,7 @@ export default function Home() {
       addPokeName(poke.name)
       maxUpdate(false)
     } 
-  }else{
-    maxUpdate(true)
-  }
+  
   }
 
  
@@ -73,9 +71,8 @@ export default function Home() {
       <main className={styles.main}>
         
         <h1 className={styles.title}>
-          Select four pokemons for your team! 
+          Select pokemons for your team! 
         </h1>
-
       <div className={styles.grid}>
         <div className={styles.card} onClick={() => addToTeam("ditto")}>
             <h2>ditto</h2>
@@ -97,7 +94,7 @@ export default function Home() {
             <h2>snorlax</h2>
           </div>
 
-          <div className={styles.card} onClick={() => addToTeam("chizard")}>
+          <div className={styles.card} onClick={() => addToTeam("Charizard")}>
             <h2>chizard</h2>
           </div>
 
@@ -117,9 +114,7 @@ export default function Home() {
     {team.length==0 ?(
       <div></div>
     ):(
-      <div>
-      {team.length<3?(
-      <div style={{alignItems:'center'}}>
+      <div style={{alignItems:'center'}} className={styles.grid}>
         
       <h1 className={styles.title}>
       Your Pokemon team
@@ -132,16 +127,18 @@ export default function Home() {
         >
           {
             team.map((pokemon) =>
-            <Card sx={{ backgroundColor: 'lightcyan',  border: '10px solid white'}}>
+            <Card sx={{ backgroundColor: '#f6f6f4',  border: '10px solid white'}}>
               <CardMedia
               component="img"
               height="194"
+              width = "194"
               image={pokemon.url}
               alt="pokemon image"/>
-            <CardContent>
+            <CardContent sx={{ justifyContent: 'center'}}>
               <Typography gutterBottom variant="h5" component="div">
                 {pokemon.name}
               </Typography>
+              <Button> {pokemon.name}</Button>
             </CardContent>
             <CardActions>
             </CardActions>
@@ -151,42 +148,7 @@ export default function Home() {
           }
         </Grid>
       </div>
-      ):(
-        <div style={{alignItems:'center'}}>
-        
-      <h1 className={styles.title}>
-      Your Pokemon team
-      </h1>
-      <Grid
-          container
-          spacing={0}
-          direction="row"
-          justifyContent="center"
-        >
-          {
-            team.map((pokemon) =>
-            <Card sx={{ backgroundColor: 'lightcyan',  border: '10px solid white'}}>
-              <CardMedia
-              component="img"
-              height="194"
-              image={pokemon.url}
-              alt="pokemon image"/>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {pokemon.name}
-              </Typography>
-            </CardContent>
-            <CardActions>
-            </CardActions>
-          </Card>
-              
-            )
-          }
-        </Grid>
-        <p>only 4 members can be added!</p>
-      </div>
-      )}
-      </div>
+      
       
     )
     

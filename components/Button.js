@@ -5,6 +5,7 @@ function Button({label = "delete", backgroundColor = "red", size = "md", handleC
         backgroundColor,
         padding: "0.5rem 1rem",
         border:"none",
+        color: "white"
     }
 
     return (

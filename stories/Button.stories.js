@@ -8,7 +8,7 @@ export default{
     component: Button,
     argTypes: { handleClick: { action: "handleClick" } },
 }
-
+    
 const Template = args => <Button {...args} />
 
 export const deleteButton = Template.bind({})

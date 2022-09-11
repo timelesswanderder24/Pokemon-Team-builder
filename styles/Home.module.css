@@ -33,7 +33,9 @@
   text-decoration: none;
 }
 
-
+.title{
+  color:#531707;
+}
 .description {
   text-align: center;
 }
