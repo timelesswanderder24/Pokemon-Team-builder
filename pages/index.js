@@ -73,7 +73,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Select pokemons for your team! 
         </h1>
-      <div className={styles.grid}>
+      <div className={styles.grid}> 
         <div className={styles.card} onClick={() => addToTeam("ditto")}>
             <h2>ditto</h2>
           </div>
