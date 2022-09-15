@@ -4,8 +4,64 @@ import Image from 'next/image';
 import PokeCard from '../components/cards/pokes/PokeCard';
 import { mockPokeCardProps } from '../components/cards/pokes/PokeCard.mocks';
 import styles from '../styles/Home.module.css';
+import {useState} from 'react';
 
 const Home: NextPage = () => {
+  const [team, addTeam] = useState([]);
+  const [pokeNames, addPokeName] = useState([]);
+  const [maxReached, maxUpdate] = useState(false);
+  const [width, setWidth] = useState(0); 
+ 
+  async function updateNewPoke(id: any, name: any, url: any) {  
+    const response = await fetch('/api/pokemonTeamAPI', {
+      method: 'POST',
+      body: JSON.stringify({
+        id,     
+        name,   
+        url
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    
+  }
+
+  async function getPokemon(search:any){
+    if (search !== "") {
+      const response = await fetch('/api/pokemonsAPI')
+      const data = await response.json() 
+      const final = data.filter((poke: { name: string | any[]; }) => poke.name.includes(search));
+      return final;
+    } 
+  }
+ 
+  
+  async function refreshTeam() {
+    const response = await fetch('/api/pokemonTeamAPI')
+    const data = await response.json()
+    console.log(data)
+    addTeam(data);
+  }
+
+ async function addToTeam(search: string){ 
+  if(team.length<=3){
+    if (search !== "") {
+      const response = await fetch('/api/pokemonsAPI')
+      const data = await response.json() 
+      const final = data.filter((poke: { name: string | string[]; }) => poke.name.includes(search));
+      const poke = final[0];
+      updateNewPoke(poke.id, poke.name, poke.url)
+      refreshTeam()
+      addPokeName(poke.name)
+      maxUpdate(false)
+    } 
+  }else{
+    maxUpdate(true)
+  }
+  }
+
+
   return (
     <div className={styles.container}> 
       <Head>
@@ -15,29 +71,64 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+      <h1 className={styles.title}>
+          Select four pokemons for your team! 
         </h1>
 
+      <div className={styles.grid}>
+        <div className={styles.card} onClick={() => addToTeam("ditto")}>
+            <h2>ditto</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("charmander")}>
+            <h2>charmander</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("pikachu")}>
+            <h2>pikachu</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("Eevee")}>
+            <h2>Eevee</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("snorlax")}>
+            <h2>snorlax</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("chizard")}>
+            <h2>chizard</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("piplup")}>
+            <h2>piplup</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("mewtwo")}>
+            <h2>mewtwo</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("squirtle")}>
+            <h2>squirtle</h2>
+          </div>
+        </div>
         <div className={styles.grid}>
-          <PokeCard {...mockPokeCardProps.base} />
-          <PokeCard {...mockPokeCardProps.base} />
-          <PokeCard {...mockPokeCardProps.base} />
-          <PokeCard {...mockPokeCardProps.base} />
+        
+        {team.length==0?(
+          <div></div>
+        ):(
+          <div>
+            <h1 className={styles.title}>
+            Your Pokemon team
+            </h1>
+            <PokeCard {...mockPokeCardProps.base} />
+          </div>
+        )}
+
         </div>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
       </footer>
     </div>
   );
