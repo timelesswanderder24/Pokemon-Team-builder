@@ -7,17 +7,17 @@ import styles from '../styles/Home.module.css';
 import {useState} from 'react';
 
 const Home: NextPage = () => {
-  const [team, addTeam] = useState([]);
-  const [pokeNames, addPokeName] = useState([]);
+  const [team, addTeam] = useState<any[]>([]);
+  const [pokeNames, addPokeName] = useState<any[]>([]);
   const [maxReached, maxUpdate] = useState(false);
   const [width, setWidth] = useState(0); 
  
-  async function updateNewPoke(id: any, name: any, url: any) {  
+  async function updateNewPoke(id: string, name: string, url: string) {  
     const response = await fetch('/api/pokemonTeamAPI', {
-      method: 'POST',
+      method: 'POST', 
       body: JSON.stringify({
-        id,     
-        name,   
+        id,      
+        name,    
         url
       }),
       headers: {
@@ -27,11 +27,11 @@ const Home: NextPage = () => {
     
   }
 
-  async function getPokemon(search:any){
+  async function getPokemon(search:string){
     if (search !== "") {
       const response = await fetch('/api/pokemonsAPI')
       const data = await response.json() 
-      const final = data.filter((poke: { name: string | any[]; }) => poke.name.includes(search));
+      const final = data.filter((poke: { name: string | string[]; }) => poke.name.includes(search));
       return final;
     } 
   }
@@ -49,14 +49,15 @@ const Home: NextPage = () => {
     if (search !== "") {
       const response = await fetch('/api/pokemonsAPI')
       const data = await response.json() 
-      const final = data.filter((poke: { name: string | string[]; }) => poke.name.includes(search));
-      const poke = final[0];
-      updateNewPoke(poke.id, poke.name, poke.url)
+      const final = data.filter((((poke: { name: string; }) => poke.name == search)));
+      const pokemon = final[0];
+      console.log();
+      updateNewPoke(pokemon.id, pokemon.name, pokemon.url)
       refreshTeam()
-      addPokeName(poke.name)
+      addPokeName(pokemon.name)
       maxUpdate(false)
     } 
-  }else{
+  }else{ 
     maxUpdate(true)
   }
   }
@@ -121,14 +122,18 @@ const Home: NextPage = () => {
             <h1 className={styles.title}>
             Your Pokemon team
             </h1>
-            <PokeCard {...mockPokeCardProps.base} />
+            {
+            team.map((pokemon) =>
+              <PokeCard tag={'Delete'} name={pokemon.name} url={pokemon.url} {...mockPokeCardProps} />
+            )
+          }
           </div>
         )}
 
         </div>
       </main>
 
-      <footer className={styles.footer}>
+      <footer className={styles.footer}> 
       </footer>
     </div>
   );
