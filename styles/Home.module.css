@@ -19,7 +19,7 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
-} 
+}
 
 .footer a {
   display: flex;
@@ -33,9 +33,19 @@
   text-decoration: none;
 }
 
-.title{
-  color:#531707;
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
 }
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+}
+
+.title,
 .description {
   text-align: center;
 }
@@ -46,6 +56,14 @@
   font-size: 1.5rem;
 }
 
+.code {
+  background: #fafafa;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
 
 .grid {
   display: flex;
@@ -72,7 +90,6 @@
 .card:active {
   color: #0070f3;
   border-color: #0070f3;
-  cursor: pointer;
 }
 
 .card h2 {
@@ -95,9 +112,6 @@
   .grid {
     width: 100%;
     flex-direction: column;
-  }
-  .title{
-    text-align: center;
   }
 }
 
