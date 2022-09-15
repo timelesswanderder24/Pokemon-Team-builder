@@ -15,5 +15,5 @@ const Template: ComponentStory<typeof PokeCard> = (args) => (
 export const Base = Template.bind({});
 
 Base.args = {
-  ...mockPokeCardProps.base,
-} as IPokeCard;
+  ...mockPokeCardProps.base,  
+} as IPokeCard;   
