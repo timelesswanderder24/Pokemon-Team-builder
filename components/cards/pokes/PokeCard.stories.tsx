@@ -16,4 +16,4 @@ export const Base = Template.bind({});
 
 Base.args = {
   ...mockPokeCardProps.base,  
-} as IPokeCard;   
+} as IPokeCard;    
