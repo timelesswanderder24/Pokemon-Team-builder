@@ -9,13 +9,14 @@ export default function Home() {
   const [team, addTeam] = useState([]);
   const [pokeNames, addPokeName] = useState([]);
 
-  async function updateNewPoke(id, name, url) {  
+  async function updateNewPoke(id, name, url, defense) {  
     const response = await fetch('/api/pokemonTeamAPI', {
       method: 'POST',
       body: JSON.stringify({
         id,      
         name,   
-        url
+        url,
+        defense
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -37,8 +38,8 @@ export default function Home() {
         const data = await response.json() 
         const final = data.filter(poke => poke.name.includes(search));
         const poke = final[0];
-        console.log(poke.name)
-        updateNewPoke(poke.id, poke.name, poke.url)
+        console.log(poke.defense)
+        updateNewPoke(poke.id, poke.name, poke.url, poke.defense)
         refreshTeam()
         addPokeName(poke.name)
       } 
@@ -79,7 +80,7 @@ export default function Home() {
             <h2>snorlax</h2>
           </div>
 
-          <div className={styles.card} onClick={() => addToTeam("chizard")}>
+          <div className={styles.card} onClick={() => addToTeam("Charizard")}>
             <h2>chizard</h2>
           </div>
 
@@ -106,7 +107,7 @@ export default function Home() {
             </h1>
             {
               team.map((pokemon) =>
-              <PokeCard key={pokemon.name} name={pokemon.name} url={pokemon.url} />
+              <PokeCard key={pokemon.name} name={pokemon.name} url={pokemon.url} defense={pokemon.defense}/>
               )
             } 
           </div>

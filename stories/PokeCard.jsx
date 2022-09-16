@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 
-export default function PokeCard({ name, url }) {
+export default function PokeCard({ name, url, defense }) {
   return (
     <div className="container">
-      <div className="card" backgroundColor="blue">
+      <div className="card" >
         <div className="card-header">
           <Image
             src={url}
@@ -16,7 +16,8 @@ export default function PokeCard({ name, url }) {
           />
         </div>
         <div className="card-body">
-          <h5>{name}</h5>
+          <h3>{name}</h3>
+          <p>{defense}</p>
         </div>
       </div>
     </div>

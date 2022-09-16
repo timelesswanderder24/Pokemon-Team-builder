@@ -8,6 +8,7 @@ export default function handler(req, res){
         const id = req.body.id
         const name = req.body.name
         const url = req.body.url
+        const defense = req.body.defense
         const newPokemon = {
             id,
             name, 
