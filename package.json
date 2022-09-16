@@ -2,17 +2,11 @@
   "name": "pokemon-team-app",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=14.0.0",
-    "yarn": ">=1.22.0",
-    "npm": "please-use-yarn"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -31,17 +25,9 @@
     "@storybook/manager-webpack5": "^6.5.12",
     "@storybook/react": "^6.5.12",
     "@storybook/testing-library": "^0.0.13",
-    "@types/node": "18.7.18",
-    "@types/react": "18.0.20",
-    "@types/react-dom": "18.0.6",
     "babel-loader": "^8.2.5",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.0",
-    "eslint-plugin-storybook": "^0.6.4",
-    "prettier": "^2.7.1",
-    "typescript": "4.8.3"
-  },
-  "resolutions": {
-    "webpack": "^5"
+    "eslint-plugin-storybook": "^0.6.4"
   }
 }

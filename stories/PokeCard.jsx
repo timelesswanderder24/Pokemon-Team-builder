@@ -1,22 +1,18 @@
-import styles from './PokeCard.module.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './PokeCard.css';
 import Image from 'next/image';
 
-export interface IPokeCard {
-  tag: string;
-  name: string;
-  url: string;
-}  
-
-const PokeCard: React.FC<IPokeCard> = ({ tag, name, url }) => {
+export default function PokeCard({ poke:{tag, name, url }}) {
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
+      <div className={styles.card} backgroundColor="blue">
         <div className={styles.card__header}>
           <Image
             src={url}
             alt="card__image"
             className={styles.card__image}
-            width="200"
+            width="150"
             height="194"
           />
         </div>
@@ -27,6 +23,4 @@ const PokeCard: React.FC<IPokeCard> = ({ tag, name, url }) => {
       </div>
     </div>
   );
-};
-
-export default PokeCard;
+}
