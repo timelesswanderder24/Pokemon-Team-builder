@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 
-export default function PokeCard({ name, url, defense , backgroundColor, handleClick}) {
+export default function PokeCard({ name, url, defense , backgroundColor}) {
   const styleCard = {
     backgroundColor,
     border: "none",

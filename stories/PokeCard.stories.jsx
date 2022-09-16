@@ -4,8 +4,7 @@ import {within, userEvent} from "@storybook/testing-library"
 
 export default {
   title: 'PokeCard',
-  component: PokeCard,
-  argTypes: { handleClick: { action: "handleClick" } }
+  component: PokeCard
 } 
 
 const Template = (args) => <PokeCard {...args} />;
@@ -17,10 +16,4 @@ Base.args = {
   defense: "electric",
   backgroundColor: "blue"
 }; 
-/*
-Base.play = async({canvasElement})=>{
-    const canvas = within(canvasElement);
-    const deleteInteraction = await canvas.getByRole('button');
-    await userEvent.click(deleteInteraction)
-}*/
 
