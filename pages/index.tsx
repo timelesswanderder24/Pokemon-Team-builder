@@ -122,11 +122,7 @@ const Home: NextPage = () => {
             <h1 className={styles.title}>
             Your Pokemon team
             </h1>
-            {
-            team.map((pokemon) =>
-              <PokeCard key={pokemon.name} tag={'Delete'} name={pokemon.name} url={pokemon.url} {...mockPokeCardProps} />
-            )
-          }
+            
           </div>
         )}
 
