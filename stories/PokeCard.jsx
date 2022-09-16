@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 
-export default function PokeCard({ poke:{tag, name, url }}) {
+export default function PokeCard({ name, url }) {
   return (
     <div className="container">
       <div className="card" backgroundColor="blue">
@@ -22,3 +22,4 @@ export default function PokeCard({ poke:{tag, name, url }}) {
     </div>
   );
 }
+

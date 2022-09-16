@@ -37,6 +37,7 @@ export default function Home() {
         const data = await response.json() 
         const final = data.filter(poke => poke.name.includes(search));
         const poke = final[0];
+        console.log(poke.name)
         updateNewPoke(poke.id, poke.name, poke.url)
         refreshTeam()
         addPokeName(poke.name)
@@ -105,9 +106,9 @@ export default function Home() {
             </h1>
             {
               team.map((pokemon) =>
-              <PokeCard key={pokemon.name} tag={'Delete'} name={pokemon.name} url={pokemon.url} />
+              <PokeCard key={pokemon.name} name={pokemon.name} url={pokemon.url} />
               )
-            }
+            } 
           </div>
         )}
         </div>
