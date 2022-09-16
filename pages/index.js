@@ -1,8 +1,48 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import {useState} from 'react';
+import React from 'react';
 
 export default function Home() {
+  const [team, addTeam] = useState([]);
+  const [pokeNames, addPokeName] = useState([]);
+
+  async function updateNewPoke(id, name, url) {  
+    const response = await fetch('/api/pokemonTeamAPI', {
+      method: 'POST',
+      body: JSON.stringify({
+        id,     
+        name,   
+        url
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    
+  }
+
+  async function refreshTeam() {
+    const response = await fetch('/api/pokemonTeamAPI')
+    const data = await response.json()
+    console.log(data)
+    addTeam(data);
+  }
+  async function addToTeam(search){ 
+    if(team.length<=3){
+      if (search !== "" && !pokeNames.includes(search)) {
+        const response = await fetch('/api/pokemonsAPI')
+        const data = await response.json() 
+        const final = data.filter(poke => poke.name.includes(search));
+        const poke = final[0];
+        updateNewPoke(poke.id, poke.name, poke.url)
+        refreshTeam()
+        addPokeName(poke.name)
+      } 
+    }
+    }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,57 +53,54 @@ export default function Home() {
 
       <main className={styles.main}> 
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1> 
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+          Select four pokemons for your team! 
+        </h1>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <div className={styles.card} onClick={() => addToTeam("ditto")}>
+            <h2>ditto</h2>
+          </div>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+          <div className={styles.card} onClick={() => addToTeam("charmander")}>
+            <h2>charmander</h2>
+          </div>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+          <div className={styles.card} onClick={() => addToTeam("pikachu")}>
+            <h2>pikachu</h2>
+          </div>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+          <div className={styles.card} onClick={() => addToTeam("Eevee")}>
+            <h2>Eevee</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("snorlax")}>
+            <h2>snorlax</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("chizard")}>
+            <h2>chizard</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("piplup")}>
+            <h2>piplup</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("mewtwo")}>
+            <h2>mewtwo</h2>
+          </div>
+
+          <div className={styles.card} onClick={() => addToTeam("squirtle")}>
+            <h2>squirtle</h2>
+          </div>
+
+      </div>
+        
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+       
       </footer>
     </div>
   )
 }
+
