@@ -26,7 +26,7 @@ const Home: NextPage = () => {
     })
     
   }
-
+/*
   async function getPokemon(search:string){
     if (search !== "") {
       const response = await fetch('/api/pokemonsAPI')
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
       const final = data.filter((poke: { name: string | string[]; }) => poke.name.includes(search));
       return final;
     } 
-  }
+  }*/
  
   
   async function refreshTeam() {
@@ -49,12 +49,12 @@ const Home: NextPage = () => {
     if (search !== "") {
       const response = await fetch('/api/pokemonsAPI')
       const data = await response.json() 
-      const final = data.filter((((poke: { name: string; url:string;}) => poke.name == search)));
-      const pokemon = final[0];
-      console.log(pokemon.url);
-      updateNewPoke(pokemon.id, pokemon.name, pokemon.url)
+      //const final = data.filter((((poke: { name: string; url:string;}) => poke.name == search)));
+      //const pokemon = final[0];
+      //console.log(pokemon.url);
+      updateNewPoke("3","pale", "pale")
       refreshTeam()
-      addPokeName(pokemon.name)
+      //addPokeName(pokemon.name)
       maxUpdate(false)
     } 
   }else{  
