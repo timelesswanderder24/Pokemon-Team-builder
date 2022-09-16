@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useState} from 'react';
 import React from 'react';
+import PokeCard from '../stories/PokeCard';
 
 export default function Home() {
   const [team, addTeam] = useState([]);
@@ -12,7 +13,7 @@ export default function Home() {
     const response = await fetch('/api/pokemonTeamAPI', {
       method: 'POST',
       body: JSON.stringify({
-        id,     
+        id,      
         name,   
         url
       }),
@@ -92,9 +93,24 @@ export default function Home() {
           <div className={styles.card} onClick={() => addToTeam("squirtle")}>
             <h2>squirtle</h2>
           </div>
-
+          
       </div>
-        
+      <div className={styles.grid}>
+        {team.length==0?(
+          <div></div>
+        ):(
+          <div>
+            <h1 className={styles.title}>
+            Your Pokemon team
+            </h1>
+            {
+              team.map((pokemon) =>
+              <PokeCard key={pokemon.name} tag={'Delete'} name={pokemon.name} url={pokemon.url} />
+              )
+            }
+          </div>
+        )}
+        </div>
       </main>
 
       <footer className={styles.footer}>
